@@ -76,4 +76,13 @@ def articulosFormulario(request):
 
     return render(request, "AppNegocio/articulosFormulario.html",{"formulario":form})
 
+def busquedaArticulos(request):
+    return render(request, "AppNegocio/articulosBusqueda.html")
 
+def buscar(request):
+    if request.GET["nombre_art"]:
+        nombre= request.GET["nombre_art"]
+        artic= Articulos.objects.filter(nombre_art=nombre)
+        return render (request, "AppNegocio/resultadoBusqueda.html", {"artic":artic})
+    else:
+        return HttpResponse("Ah habido un error en la carga")
